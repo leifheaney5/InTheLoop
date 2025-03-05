@@ -11,6 +11,10 @@ Last Updated: 2025-3-5
 
 - download and install locally on your machine; pip install Python and necesary packages
 - use a local ENV variable to set passwords and emails via BASH for optimal security protocol
+    (set the following):
+      SENDER_EMAIL=your_email@gmail.com
+      RECEIVER_EMAIL=receiver_email@example.com
+      APP_PASSWORD=your_app_password
 - create a path to main.py on your machine using cronjob/taskschedule for automation functionality (which already exists within the code)
 - default automation set to run at 8am daily
 
