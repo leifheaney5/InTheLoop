@@ -101,10 +101,19 @@ def send_email(html_content):
     except Exception as e:
         logging.error(f"Error sending email: {e}")
 
-if __name__ == "__main__":
+def job():
+    """Job to fetch articles, create email content, and send the email."""
     articles = fetch_articles()
     if articles:
         email_content = create_email_content(articles)
         send_email(email_content)
     else:
         logging.warning("No articles to send.")
+
+schedule.every().day.at("08:00").do(job)
+
+while True:
+    schedule.run_pending()
+    time.sleep(60)  # Wait for 1 minute before checking again
+
+
