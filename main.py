@@ -154,15 +154,16 @@ def show_popup(articles):
         art['site'] = domain
         grouped[section].append(art)
 
-    # Build HTML content
+    # Build HTML content with a slate grey dark theme
     html = """
     <html><head><style>
-    body { font-family: Arial, sans-serif; }
-    h2 { color: #2a5d9f; }
-    h3 { margin-bottom: 0; }
+    body { background: #2f3640; color: #f5f6fa; font-family: 'Segoe UI', Arial, sans-serif; }
+    h2 { color: #00aaff; }
+    h3 { margin-bottom: 0; color: #fbc531; }
     ul { margin-top: 0; }
-    a { color: #1a0dab; text-decoration: underline; }
-    .site { color: #555; font-size: 0.95em; }
+    a { color: #4fc3f7; text-decoration: underline; }
+    .site { color: #9c88ff; font-size: 0.95em; }
+    li { margin-bottom: 0.5em; color: #f5f6fa; }
     </style></head><body>
     <h2>InTheLoop - Daily News Briefing</h2>
     """
@@ -177,10 +178,11 @@ def show_popup(articles):
     if HAS_HTML:
         root = tk.Tk()
         root.title("InTheLoop - Daily News Briefing")
-        root.geometry("700x500")
-        frame = HtmlFrame(root, horizontal_scrollbar="auto")
+        root.geometry("800x600")
+        root.configure(bg="#2f3640")
+        frame = HtmlFrame(root, horizontal_scrollbar="auto", background="#2f3640")
         frame.set_content(html)
-        frame.pack(fill="both", expand=True)
+        frame.pack(fill="both", expand=True, padx=10, pady=10)
         root.mainloop()
     else:
         # Fallback: open in browser
