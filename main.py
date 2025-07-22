@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 
 # add or drop RSS feeds as desired
 rss_feeds = {
-    "Tech": [
+    "Technology": [
         # Startups & Analysis
         "https://techcrunch.com/feed/",
         # Product & Gadget Coverage
@@ -30,10 +30,10 @@ rss_feeds = {
         "https://news.ycombinator.com/rss"
     ],
 
-    "Stocks & Investors": [
+    "Finance": [
         # Market News & Breaking Analysis
-        "https://feeds.marketwatch.com/marketwatch/topstories/",                # MarketWatch Top Stories
-        "https://www.reuters.com/markets/rss",                                # Reuters Markets :contentReference[oaicite:0]{index=0}
+        "https://feeds.marketwatch.com/marketwatch/topstories/",             # MarketWatch Top Stories
+        "https://www.reuters.com/markets/rss",                               # Reuters Markets :contentReference[oaicite:0]{index=0}
         "https://finance.yahoo.com/news/rssindex",                           # Yahoo Finance Market News
         "https://seekingalpha.com/feed.xml",                                 # Seeking Alpha Latest Ideas :contentReference[oaicite:1]{index=1}
         # TV & Web Financial Coverage
@@ -100,7 +100,7 @@ def send_email(html_content):
         return
 
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = "In the Loop – Daily Tech News Briefing"
+    msg['Subject'] = "InTheLoop - Your Daily News Briefing"
     msg['From'] = sender
     msg['To'] = receiver
     msg.attach(MIMEText(html_content, 'html'))
