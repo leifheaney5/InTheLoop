@@ -9,30 +9,53 @@ from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import smtplib
 
-# Load environment variables
 load_dotenv()
 
-# Logging
 logging.basicConfig(level=logging.INFO)
 
-# RSS feeds
-rss_feeds = [
-    'https://feeds.feedburner.com/TechCrunch/startups',
-    'https://www.theverge.com/rss/index.xml',
-    'https://rss.cnn.com/rss/cnn_tech.rss',
-    'https://www.wired.com/feed/category/tech/latest/rss',
-    'https://feeds.feedburner.com/ArsTechnica/Technology',
-    'https://www.engadget.com/rss.xml',
-    'https://www.bbc.co.uk/news/technology/rss.xml',
-    'https://techcrunch.com/feed/',
-    'https://www.cnet.com/rss/news/',
-    'https://www.zdnet.com/feed/',
-    'https://www.infoworld.com/index.rss',
-    'https://www.thedrum.com/rss/technology',
-    'https://www.fastcompany.com/rss',
-    'https://www.siliconrepublic.com/feed',
-    'https://www.ibm.com/blogs/9/rss/ai/',
-]
+# add or drop RSS feeds as desired
+rss_feeds = {
+    "Tech": [
+        # Startups & Analysis
+        "https://techcrunch.com/feed/",
+        # Product & Gadget Coverage
+        "https://www.theverge.com/rss/index.xml",
+        "https://www.engadget.com/rss.xml",
+        # Deep‑dive & Labs
+        "https://feeds.arstechnica.com/arstechnica/technology-lab",
+        # Industry Trends & Reviews
+        "https://www.wired.com/feed/category/tech/latest/rss",
+        "https://www.technologyreview.com/feed/",
+        # Community & Hacker Culture
+        "https://news.ycombinator.com/rss"
+    ],
+
+    "Stocks & Investors": [
+        # Market News & Breaking Analysis
+        "https://feeds.marketwatch.com/marketwatch/topstories/",                # MarketWatch Top Stories
+        "https://www.reuters.com/markets/rss",                                # Reuters Markets :contentReference[oaicite:0]{index=0}
+        "https://finance.yahoo.com/news/rssindex",                           # Yahoo Finance Market News
+        "https://seekingalpha.com/feed.xml",                                 # Seeking Alpha Latest Ideas :contentReference[oaicite:1]{index=1}
+        # TV & Web Financial Coverage
+        "https://www.cnbc.com/id/100003114/device/rss/rss.html",             # CNBC Top News & Analysis
+        "https://news.alphastreet.com/feed",                                 # AlphaStreet Market Coverage :contentReference[oaicite:2]{index=2}
+        "https://www.investors.com/feed/"                                    # Investor’s Business Daily
+    ],
+
+    "General News": [
+        # Global & World
+        "https://feeds.bbci.co.uk/news/world/rss.xml",
+        "https://rss.cnn.com/rss/cnn_topstories.rss",
+        "https://www.reuters.com/reuters/topNews",                            # Reuters Top News :contentReference[oaicite:3]{index=3}
+        # U.S. & Regional
+        "https://rss.nytimes.com/services/xml/rss/nyt/US.xml",
+        "https://www.theguardian.com/us-news/rss",
+        # Wire Services & Aggregators
+        "https://news.google.com/rss",
+        "https://apnews.com/apf-topnews",
+        "https://www.npr.org/rss/rss.php?id=1001"
+    ]
+}
 
 def fetch_articles():
     articles = []
@@ -62,7 +85,7 @@ def create_email_content(articles):
     return f"""
     <html>
       <body>
-        <h2>In The Loop – Daily Tech News Briefing</h2>
+        <h2>InTheLoop - Your Daily News Briefing</h2>
         {article_html}
       </body>
     </html>
