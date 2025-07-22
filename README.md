@@ -3,6 +3,8 @@
 
 **Your daily personalized news digest, delivered simple desktop popup and/or email.**
 
+![InTheLoop Screenshot](InTheLoop-Screenshot.png)
+
 ---
 
 ## Features
