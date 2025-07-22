@@ -1,20 +1,58 @@
+
 # InTheLoop
 
-### Developer: Leif Heaney
-### Contact: leif@leifheaney.com
-Created On: 2024-10-24
-Last Updated: 2025-3-5
+**Your daily personalized news digest, delivered simple desktop popup and/or email.**
 
-### Information:
+---
 
-*Note*: InTheLoop only sends emails from Gmail accounts, however, any email address can receive sent emails via 'SMTP_SSL 465' protocol.
+## Features
+- Fetches top headlines from Technology, Finance, and General News RSS feeds.
+- Pops up a modern, intuitive desktop window with clickable headlines.
+- Sends a beautiful, regularly-scheduled email to your inbox every morning.
+- Easy to configure and run on your own machine.
+- Add or remove RSS feeds at will to tailor your inbox/ 
 
-- download and install locally on your machine; pip install Python and necesary packages
-- use a local ENV variable to set passwords and emails via BASH for optimal security protocol
-    (set the following):
-      SENDER_EMAIL=your_email@gmail.com
-      RECEIVER_EMAIL=receiver_email@example.com
-      APP_PASSWORD=your_app_password
-- create a path to main.py on your machine using cronjob/taskschedule for automation functionality (which already exists within the code)
-- default automation set to run at 8am daily
+## Quick Start
+
+1. **Clone this repository**
+2. **Install Python 3.8+** (if not already installed)
+3. **Install required packages:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+   (If you want the best popup experience, also run: `pip install tkinterweb`)
+
+4. **Set up your environment variables:**
+   - Create a file named `.env` in the project folder with:
+     ```
+     SENDER_EMAIL=your_gmail_address@gmail.com
+     APP_PASSWORD=your_gmail_app_password
+     RECEIVER_EMAIL=recipient_email_address@gmail.com
+     ```
+   - **Gmail users:** You must use an [App Password](https://myaccount.google.com/apppasswords) (NOT your regular gmail password) IF you have 2FA enabled.
+
+5. **Run the app:**
+   ```bash
+   python main.py
+   ```
+   - By default, the news will be sent and shown at 9:00am ET every day.
+   - To test instantly, change the schedule or call the `job()` function directly in `main.py`.
+
+---
+
+## Automation
+- For daily automation, use Windows Task Scheduler or a cron job to run `main.py` at your preferred time.
+
+---
+
+## Support
+- Developer: Leif Heaney  
+  Contact: leif@leifheaney.com
+  Portfolio: [www.leifheaney.com](https://leifheaney.com/)
+  GitHub: https://github.com/leifheaney5
+
+---
+
+**Stay up to date with your daily news using InTheLoop!**
+
 
