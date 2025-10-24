@@ -17,7 +17,10 @@
             <div class="header-content">
                 <div class="logo-section">
                     <i class="fas fa-newspaper logo-icon"></i>
-                    <h1 class="logo">InTheLoop</h1>
+                    <div>
+                        <h1 class="logo">InTheLoop</h1>
+                        <p class="tagline">Stay informed, stay ahead.</p>
+                    </div>
                 </div>
                 <div class="header-controls">
                     <a href="/feeds" class="manage-feeds-btn" title="Manage feeds">
@@ -36,7 +39,9 @@
 
     <!-- Main Content -->
     <main class="main-content">
-        <div class="container">
+        <div class="container-with-sidebar">
+            <!-- Main Content Area -->
+            <div class="main-area">
             <!-- Search and Filter Bar -->
             <div class="control-bar">
                 <div class="search-box">
@@ -73,6 +78,8 @@
                             <i class="fas fa-briefcase"></i>
                         {% elif category == 'Entertainment' %}
                             <i class="fas fa-film"></i>
+                        {% elif category == 'Music' %}
+                            <i class="fas fa-music"></i>
                         {% elif category == 'Health' %}
                             <i class="fas fa-heartbeat"></i>
                         {% endif %}
@@ -87,6 +94,10 @@
                 <div class="stat-item">
                     <i class="fas fa-newspaper"></i>
                     <span id="articleCount">0</span> articles
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-rss"></i>
+                    <span id="feedCount">0</span> feeds
                 </div>
                 <div class="stat-item">
                     <i class="fas fa-clock"></i>
@@ -111,6 +122,27 @@
                 <h3>No articles found</h3>
                 <p>Try adjusting your filters or search terms</p>
             </div>
+            </div>
+
+            <!-- Trending Topics Sidebar -->
+            <aside class="trending-sidebar" id="trendingSidebar">
+                <div class="sidebar-header">
+                    <h2>
+                        <i class="fas fa-fire"></i>
+                        Trending
+                    </h2>
+                    <span class="trending-period">Last 24 Hours</span>
+                </div>
+                
+                <div class="sidebar-loading" id="sidebarLoading">
+                    <div class="spinner-small"></div>
+                    <p>Loading...</p>
+                </div>
+                
+                <div class="trending-list" id="trendingList">
+                    <!-- Trending topics will be inserted here -->
+                </div>
+            </aside>
         </div>
     </main>
 

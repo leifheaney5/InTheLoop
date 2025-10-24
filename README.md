@@ -10,10 +10,17 @@
 ## Features
 
 ### Content Coverage
-- **8 News Categories**: Technology, Finance, General News, Sports, Science, Business, Entertainment, and Health
-- **50+ Premium RSS Sources**: Curated feeds from top publications
-- **30+ Additional Feeds Available**: Easily add more sources to customize your news experience
+- **9 News Categories**: Technology, Finance, General News, Sports, Science, Business, Entertainment, Music, and Health
+- **70+ Premium RSS Sources**: Curated feeds from top publications across all categories
+- **27+ Additional Feeds Available**: Easily add more sources to customize your news experience
 - **Real-time Updates**: Articles cached for 30 minutes with manual refresh option
+
+### Trending Topics
+- **Real-time Trend Analysis**: Identifies trending topics from the last 24 hours of articles
+- **Smart Keyword Extraction**: Uses frequency analysis with 2-3 word phrase detection
+- **Filtered Results**: Removes 200+ common stopwords and generic terms for meaningful trends
+- **Live Sidebar**: Always-visible trending topics panel with related articles
+- **Sticky Navigation**: Sidebar scrolls independently for easy browsing
 
 ### Feed Management
 - **View Active Feeds**: See all your current RSS sources in one organized dashboard

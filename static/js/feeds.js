@@ -397,8 +397,6 @@ function initEventListeners() {
 
 // ==================== Initialization ====================
 async function init() {
-    console.log('🔧 Initializing Feed Management...');
-    
     // Initialize theme
     initTheme();
     
@@ -410,8 +408,6 @@ async function init() {
         loadActiveFeeds(),
         loadAvailableFeeds()
     ]);
-    
-    console.log('✅ Feed Management initialized!');
 }
 
 // Start the application when DOM is ready

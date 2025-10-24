@@ -15,6 +15,7 @@ const elements = {
     themeToggle: document.getElementById('themeToggle'),
     refreshBtn: document.getElementById('refreshBtn'),
     articleCount: document.getElementById('articleCount'),
+    feedCount: document.getElementById('feedCount'),
     lastUpdated: document.getElementById('lastUpdated')
 };
 
@@ -68,6 +69,69 @@ async function fetchArticles(forceRefresh = false) {
         showError('Failed to load articles. Please try again.');
         hideLoading();
     }
+}
+
+async function fetchTrendingTopics() {
+    try {
+        const sidebarLoading = document.getElementById('sidebarLoading');
+        const trendingList = document.getElementById('trendingList');
+        
+        if (sidebarLoading) sidebarLoading.style.display = 'block';
+        if (trendingList) trendingList.style.display = 'none';
+        
+        const response = await fetch('/api/trending');
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch trending topics');
+        }
+        
+        const data = await response.json();
+        renderTrendingTopics(data.trending || []);
+        
+        if (sidebarLoading) sidebarLoading.style.display = 'none';
+        if (trendingList) trendingList.style.display = 'block';
+    } catch (error) {
+        console.error('Error fetching trending topics:', error);
+        const sidebarLoading = document.getElementById('sidebarLoading');
+        if (sidebarLoading) {
+            sidebarLoading.innerHTML = '<p style="color: var(--text-secondary); font-size: 0.875rem; padding: 1rem;">Unable to load trending topics</p>';
+        }
+    }
+}
+
+function renderTrendingTopics(topics) {
+    const trendingList = document.getElementById('trendingList');
+    
+    if (!trendingList) return;
+    
+    if (topics.length === 0) {
+        trendingList.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 2rem 1rem; font-size: 0.875rem;">No trending topics found in the last 24 hours</p>';
+        return;
+    }
+    
+    trendingList.innerHTML = topics.map((topic, index) => `
+        <div class="trending-item" style="animation-delay: ${index * 0.05}s">
+            <div class="trending-item-header">
+                <div class="trending-item-name">${escapeHtml(topic.topic)}</div>
+                <span class="trending-item-count">${topic.count}</span>
+            </div>
+            ${topic.articles && topic.articles.length > 0 ? `
+                <div class="trending-item-articles">
+                    ${topic.articles.slice(0, 2).map(article => `
+                        <div class="trending-item-article">
+                            <a href="${article.link}" target="_blank" rel="noopener noreferrer">
+                                ${escapeHtml(article.title)}
+                            </a>
+                            <div class="trending-item-meta">
+                                <span class="trending-item-site">${escapeHtml(article.site)}</span>
+                                <span class="trending-item-category">${escapeHtml(article.category)}</span>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : ''}
+        </div>
+    `).join('');
 }
 
 // ==================== Filter Functions ====================
@@ -152,9 +216,11 @@ function createArticleCard(article, index) {
     card.innerHTML = `
         <div class="article-header">
             <span class="category-badge ${categoryClass}">${escapeHtml(article.category)}</span>
-            <div class="article-time">
-                <i class="far fa-clock"></i>
-                ${formatTimeAgo(article.published)}
+            <div class="article-actions">
+                <div class="article-time">
+                    <i class="far fa-clock"></i>
+                    ${formatTimeAgo(article.published)}
+                </div>
             </div>
         </div>
         
@@ -226,6 +292,11 @@ function updateStats(data) {
         elements.lastUpdated.textContent = `Updated ${timeAgo}`;
     } else {
         elements.lastUpdated.textContent = 'Just updated';
+    }
+    
+    // Update feed count
+    if (data.feed_count !== undefined) {
+        elements.feedCount.textContent = data.feed_count;
     }
 }
 
@@ -317,15 +388,12 @@ function initEventListeners() {
 function startAutoRefresh() {
     // Refresh articles every 30 minutes
     setInterval(() => {
-        console.log('Auto-refreshing articles...');
         fetchArticles(true);
     }, 30 * 60 * 1000);
 }
 
 // ==================== Initialization ====================
 async function init() {
-    console.log('🚀 Initializing InTheLoop...');
-    
     // Initialize theme
     initTheme();
     
@@ -335,10 +403,11 @@ async function init() {
     // Load initial articles
     await fetchArticles();
     
+    // Load trending topics
+    await fetchTrendingTopics();
+    
     // Start auto-refresh
     startAutoRefresh();
-    
-    console.log('✅ InTheLoop initialized successfully!');
 }
 
 // Start the application when DOM is ready
