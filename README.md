@@ -3,7 +3,7 @@
 
 **Your daily personalized news digest with a modern web interface and smart filtering.**
 
-![InTheLoop Banner](InTheLoop-Screenshot.png)
+<img width="2494" height="1290" alt="firefox_pWW9LI1QHY" src="https://github.com/user-attachments/assets/0816dbe9-4990-4b69-9da7-dfe627b936ac" />
 
 ---
 
